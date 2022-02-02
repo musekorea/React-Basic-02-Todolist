@@ -1,0 +1,112 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  color:white;
+}
+h2{
+  padding: 12px;
+}
+.app-container{
+  background-color: #003566;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+.todos-container{
+  background-color: white;
+  width: 80%;
+  height: 100%;
+  border-radius: 5px;
+}
+.todos-container ul{
+  padding: 12px;
+  list-style: none;
+  color:black
+}
+.todos-container ul li{
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 6px;
+  margin: 12px 0;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items:center ;
+}
+.todos-container ul li:hover{
+  background-color: #dfe7fd;
+  transform: scale(1.01);
+  transition: all ease-in-out 0.2s;
+}
+
+.todos-container ul li .button-box {
+  display: flex;
+  position: relative;
+  bottom: -3px;
+  
+}
+.todos-container ul li .button-box button{
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0 4px;
+}
+.todos-container ul li .button-box button img{
+  transform: scale(1.2);
+}
+.todos-container ul li .button-box button img:hover{
+  transform: scale(1.8);
+}
+
+
+
+.form-container{
+  margin-top: 12px;
+  width: 80%;
+  height: 20vh;
+}
+.form-container .input-box{
+  display: flex;
+  background-color: white;
+  border-radius: 5px 5px 0 0 ;
+  width: 100%;
+}
+
+.form-container .input-box span{
+  background-color: #588157;
+  border-radius: 5px 0 0 0 ;
+  padding: 0 6px;
+}
+.form-container .input-box input{
+  border: none;
+  outline: none;
+  padding: 6px;  
+  width: 100%;
+  
+}
+.form-container .input-box input::placeholder{
+  color: #588157;
+  padding: 0 3px;
+}
+
+.form-container button{
+  width: 100%;
+  border:none;
+  outline: none;
+  background-color:#ffc300 ;
+  padding: 6px;
+  border-radius: 0 0 5px 5px;
+  font-weight: 600;
+}
+.form-container button:hover{
+  cursor: pointer;
+  color: red;
+  transition: color ease-in-out 0.2s;
+}

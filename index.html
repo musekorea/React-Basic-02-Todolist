@@ -7,6 +7,7 @@
   <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="style.css">
   <title>React Todolist</title>
 </head>
 <body>
@@ -15,11 +16,38 @@
 
   <script type="text/babel">
     const root = document.querySelector("#root")
-    const Title = <h1>React Todolist</h1>
-    const App = ()=>{
-      return <div>
-        <h1>HELLO</h1>
+    const Form = ()=>{
+      return <div className="form-container">
+        <form action="">
+          <div className="input-box">
+            <span>📋</span>
+            <input type="text" placeholder="New Todo"/></div>
+          <button >Add new task</button>
+          </form>
         </div>
+    }
+    const Todos = ()=>{
+      return <div className="todos-container">
+        <ul>
+          <li>sample todos 
+            <div className="button-box">
+              <button><img src="./images/editor.png" alt="" style={{width:"12px"}}/></button>
+              <button><img src="./images/delete-fill.png" alt="" style={{width:"12px"}}/></button></div>
+          </li> 
+          <li>sample todos</li>
+          <li>sample todos</li>
+          <li>sample todos</li>
+        </ul>
+        </div>
+    }
+    const App = ()=>{
+      return (
+        <div className="app-container">
+          <h2>React Todolist</h2>
+          <Todos/>
+          <Form/>
+          
+        </div>)
     } 
     ReactDOM.render(<App/>, root)
   </script>
