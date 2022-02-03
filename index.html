@@ -34,26 +34,43 @@
         </div>
     }
 
-    const Todo = ({todo})=>{
-      return <li>{todo}
+    const Todo = ({todo,id,deleteTodo})=>{
+      const handleDelete = (e)=>{
+        const target = e.target.parentElement.parentElement.parentElement
+        deleteTodo(Number(target.id))
+        /* target.remove() */
+      }
+      return <li id={id}>{todo}
             <div className="button-box">
               <button><img src="./images/editor.png" alt="" style={{width:"12px"}}/></button>
-              <button><img src="./images/delete-fill.png" alt="" style={{width:"12px"}}/></button></div>
+              <button><img src="./images/delete-fill.png" alt="" style={{width:"12px"}} onClick={handleDelete}/></button></div>
           </li> 
     }
 
     const App = ()=>{
       const [todos, setTodos] = React.useState(JSON.parse(localStorage.getItem("todos"))||[] )
+      const [todoID, setTodoID] = React.useState(Number(localStorage.getItem("idCounter"))||0)
       const makeTodo = (inputValue)=>{
-        setTodos(()=>[...todos, inputValue])
-        localStorage.setItem("todos", JSON.stringify([...todos, inputValue]))
+        setTodoID(prev=>prev+1)
+        setTodos(()=>[...todos, {content:inputValue, id:todoID+1}])
+        localStorage.setItem("todos", JSON.stringify([...todos, {content:inputValue, id:todoID+1}]))
+        localStorage.setItem("idCounter", JSON.stringify(todoID+1))
+      }
+      const deleteTodo = (id)=>{
+        const updateTodos = todos.filter((todo)=>{
+          return todo.id!==id
+        })
+        console.log(updateTodos)
+        localStorage.setItem("todos", JSON.stringify(updateTodos))
+        setTodos([...updateTodos])
+        
       }
       return (
         <div className="app-container">
           <h2>React Todolist</h2>
           <div className="todos-container">
             <ul>
-              {todos.map((todo)=><Todo todo={todo} />)}
+              {todos.map((todo)=><Todo todo={todo.content} id={todo.id} deleteTodo={deleteTodo}/>)}
             </ul>
           </div>
           <Form makeTodo={makeTodo}/>
