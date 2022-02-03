@@ -16,37 +16,46 @@
 
   <script type="text/babel">
     const root = document.querySelector("#root")
-    const Form = ()=>{
+
+    const Form = ({makeTodo})=>{
+      const [inputValue, setInputValue] = React.useState("")
+      const handleInputChange = (e)=>{setInputValue(()=>e.target.value)}
+      const handleFormSubmit = (e)=>{
+        e.preventDefault()
+        makeTodo(inputValue)
+      }
       return <div className="form-container">
-        <form action="">
+        <form action="" onSubmit={handleFormSubmit}>
           <div className="input-box">
             <span>📋</span>
-            <input type="text" placeholder="New Todo"/></div>
+            <input type="text" placeholder="New Todo" value={inputValue} onChange={handleInputChange}/></div>
           <button >Add new task</button>
           </form>
         </div>
     }
-    const Todos = ()=>{
-      return <div className="todos-container">
-        <ul>
-          <li>sample todos 
+
+    const Todo = ({newTodo})=>{
+      return <li>{newTodo}
             <div className="button-box">
               <button><img src="./images/editor.png" alt="" style={{width:"12px"}}/></button>
               <button><img src="./images/delete-fill.png" alt="" style={{width:"12px"}}/></button></div>
           </li> 
-          <li>sample todos</li>
-          <li>sample todos</li>
-          <li>sample todos</li>
-        </ul>
-        </div>
     }
+
     const App = ()=>{
+      const [newTodo, setNewTodo] = React.useState("")
+      const makeTodo = (inputValue)=>{
+        setNewTodo(inputValue)
+      }
       return (
         <div className="app-container">
           <h2>React Todolist</h2>
-          <Todos/>
-          <Form/>
-          
+          <div className="todos-container">
+            <ul>
+              <Todo newTodo={newTodo}/>
+            </ul>
+          </div>
+          <Form makeTodo={makeTodo}/>
         </div>)
     } 
     ReactDOM.render(<App/>, root)
