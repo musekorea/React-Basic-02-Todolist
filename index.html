@@ -22,7 +22,9 @@
       const handleInputChange = (e)=>{setInputValue(()=>e.target.value)}
       const handleFormSubmit = (e)=>{
         e.preventDefault()
+        if(!inputValue){return}
         makeTodo(inputValue)
+        setInputValue("")
       }
       return <div className="form-container">
         <form action="" onSubmit={handleFormSubmit}>
@@ -38,14 +40,18 @@
       const handleDelete = (e)=>{
         const target = e.target.parentElement.parentElement.parentElement
         deleteTodo(Number(target.id))
-        /* target.remove() */
+      }
+      const handleEdit = (e)=>{
+        const target = e.target.parentElement.parentElement.parentElement
       }
       return <li id={id}>{todo}
             <div className="button-box">
-              <button><img src="./images/editor.png" alt="" style={{width:"12px"}}/></button>
+              <button><img src="./images/editor.png" alt="" style={{width:"12px"}} onClick={handleEdit}/></button>
               <button><img src="./images/delete-fill.png" alt="" style={{width:"12px"}} onClick={handleDelete}/></button></div>
           </li> 
     }
+
+
 
     const App = ()=>{
       const [todos, setTodos] = React.useState(JSON.parse(localStorage.getItem("todos"))||[] )
@@ -60,10 +66,8 @@
         const updateTodos = todos.filter((todo)=>{
           return todo.id!==id
         })
-        console.log(updateTodos)
         localStorage.setItem("todos", JSON.stringify(updateTodos))
         setTodos([...updateTodos])
-        
       }
       return (
         <div className="app-container">
